@@ -28,6 +28,9 @@ const Box = styled.div`
   align-items: center;
   span{
     font-size: 36px;
+    &:hover{
+      font-size: 50px;
+    }
   }
   `
 
