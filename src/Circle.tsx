@@ -19,12 +19,15 @@ interface CircleProps {
     // 타입스크립트에게 bgColor는 string이 되어야 한다고 설명해주자
     bgColor: string
     borderColor?: string
+    text?: string
 }
 
 // CircleProps의 타입이 뭔지 Compinent에게 말해줘야함
 // 이 bgColor의 타입은 CircleProps의 object라고 말해주고있는거야
-function Circle({bgColor,borderColor}:CircleProps) {
-    return <Container bgColor={bgColor} borderColor={borderColor ?? "blue"}></Container>  
+function Circle({bgColor,borderColor, text = "default text"}:CircleProps) {
+    return <Container bgColor={bgColor} borderColor={borderColor ?? "blue"}>
+        {text}
+    </Container>  
 }
 
 export default Circle;
