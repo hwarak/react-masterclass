@@ -47,17 +47,6 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
-  *{
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: ${(props) => props.theme.backgroundColor};
-    color: ${(props) => props.theme.textColor};
-  }
-  a{
-    text-decoration: none;
-  }
   `
 
 function App() {
