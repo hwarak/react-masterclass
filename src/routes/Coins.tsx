@@ -19,7 +19,17 @@ background-color: white;
 color: ${(props) => props.theme.backgroundColor};
 padding: 20px;
 margin-bottom: 10px;
-border-radius: 15px;`
+border-radius: 15px;
+a{
+    transition: color 0.2s ease-in;
+    display: block;
+}
+&:hover{
+   a{
+       color:${props => props.theme.accentColor};
+   } 
+}
+`
 
 const Title = styled.h1`
 font-size: 48px;
