@@ -1,15 +1,29 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.div``
+const Container = styled.div`
+padding: 0px 20px;
+`
 
-const Header = styled.header``
+const Header = styled.header`
+height: 15vh;
+display: flex;
+justify-content: center;
+align-items: center;
+`
 
 const CoinsList = styled.ul``
 
-const Coin = styled.li``
+const Coin = styled.li`
+background-color: white;
+color: ${(props) => props.theme.backgroundColor};
+padding: 20px;
+margin-bottom: 10px;
+border-radius: 15px;`
 
 const Title = styled.h1`
-    color:${(props) => props.theme.accentColor};                   
+font-size: 48px;
+color:${(props) => props.theme.accentColor};                   
 `
 const coins = [
     {
@@ -23,7 +37,7 @@ const coins = [
         },
         {
         "id":"eth-ethereum",
-        "name":"Ethereum",
+        "name":"Ethere um",
         "symbol":"ETH",
         "rank":2,
         "is_new":false,
@@ -56,7 +70,7 @@ function Coins() {
             <Title>Coin</Title>
         </Header>
         <CoinsList>
-            {coins.map(coin => <Coin key={coin.id}>{coin.name}</Coin>)}
+            {coins.map(coin => <Coin key={coin.id}><Link to={`/${coin.id}`}>{coin.name} &rarr;</Link></Coin>)}
         </CoinsList>
     </Container>
 }
