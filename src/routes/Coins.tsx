@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { isConstructorDeclaration } from "typescript";
+import { fetchCoins } from "../api";
 
 const Container = styled.div`
 padding: 0px 20px;
@@ -52,7 +52,7 @@ const Img = styled.img`
     margin-right: 10px;
 `
 
-interface CoinInterface{
+interface ICoin{
     id: string,
     name: string,
     symbol: string,
@@ -63,30 +63,14 @@ interface CoinInterface{
 }
 
 function Coins() {
-    const [coins, setCoins] = useState<CoinInterface[]>([]);
-    // 우리 state가 coin 으로 된 array라고 말해주자
-
-    const [loading, setLoading] = useState(true);
-
-    // 특정한 시기에만 코드를 실행하기 위해 useEffect를 사용하자
-    // component life의 시작점에서만 실행하도록 할거야
-
-    useEffect(() => {
-        // 여기서 바로 function을 실행시킬 수 있음
-        (async () => {
-            const response = await fetch("https://api.coinpaprika.com/v1/coins");
-            const json = await response.json();
-            setCoins(json.slice(0, 100));
-            setLoading(false);
-         })();
-    }, []);
+    const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchCoins);
     return <Container>
         <Header>
             <Title>Coin</Title>
         </Header>
-        {loading ? (<Loader>Loading...</Loader>) : (
+        {isLoading ? (<Loader>Loading...</Loader>) : (
             <CoinsList> 
-                {coins.map(coin =>
+                {data?.slice(0, 100).map(coin =>
                 <Coin key={coin.id}>
                         <Link to={`/${coin.id}`} state={{ name: coin.name }}>
                         <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />
